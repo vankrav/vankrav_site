@@ -1,0 +1,83 @@
+:root {
+  --bg: #dedede;
+  --fg: #111111;
+  --muted: #3a3a3a;
+  --accent: #ff2a2a; /* можно сменить на #2A63FF */
+  --border: #c8c8c8;
+  --grid: 12px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial;
+  letter-spacing: 0.1px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+.header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+.nav { display: none; gap: 28px; }
+.nav a { color: var(--muted); transition: color .2s ease; }
+.nav a.active, .nav a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
+
+.menu { position: relative; }
+.menu-button { background: transparent; border: 1px solid var(--fg); color: var(--fg); padding: 8px 12px; border-radius: 6px; transition: background .2s ease; }
+.menu-button:hover { background: rgba(0,0,0,.06); }
+.menu-list { position: absolute; right: 0; top: 42px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; min-width: 220px; display: none; }
+.menu.open .menu-list { display: block; }
+.menu-item { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.menu-item:last-child { border-bottom: none; }
+.menu-item:hover { background: rgba(0,0,0,.06); }
+
+.hero { padding: 120px 0 64px; border-bottom: 1px solid var(--border); }
+.hero h1 { font-size: clamp(40px, 6vw, 84px); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.5px; }
+.hero p { color: var(--muted); max-width: 800px; font-size: clamp(16px, 2vw, 20px); }
+.hero-cta { margin-top: 28px; display: flex; gap: 14px; }
+.btn { padding: 12px 16px; border-radius: 8px; border: 1px solid var(--fg); background: transparent; color: var(--fg); transition: background .2s ease, color .2s ease; }
+.btn.primary { background: var(--fg); color: var(--bg); }
+.btn:hover { background: var(--fg); color: var(--bg); }
+
+.section { padding: 64px 0; }
+.section-title { font-size: 18px; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Сетка и карточки проектов */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+@media (min-width: 720px) { .grid { gap: 24px; } }
+@media (min-width: 1040px) { .grid { gap: 24px; } }
+
+.card { background: transparent; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: transform .2s ease, border-color .2s ease, background .2s ease; display: flex; flex-direction: column; }
+.card:hover { transform: translateY(-2px); border-color: var(--fg); background: rgba(0,0,0,.03); }
+.card img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.card-body { padding: 14px; }
+.card-title { font-weight: 700; }
+.card-meta { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+.tag { display: inline-block; padding: 2px 8px; border: 1px solid var(--fg); border-radius: 999px; font-size: 12px; margin-right: 6px; }
+.accent { color: var(--accent); }
+
+.list { display: grid; gap: 12px; }
+.list-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.list-item a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.filters { display: flex; gap: 12px; margin: 12px 0 24px; }
+.filter { padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; background: transparent; }
+.filter[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
+
+.footer { padding: 48px 0 64px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); }
+
+/* Формы */
+input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: #f4f4f4; color: var(--fg); }
+label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+form .row { display: grid; gap: 12px; }
+@media (min-width: 720px) { form .row.two { grid-template-columns: 1fr 1fr; } }
+
+@media (min-width: 840px) { .nav { display: flex; } }
+
