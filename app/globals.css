@@ -81,3 +81,14 @@ form .row { display: grid; gap: 12px; }
 
 @media (min-width: 840px) { .nav { display: flex; } }
 
+.bg-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none; /* фон не перехватывает клики */
+}
+
+.app-content {
+  position: relative;
+  z-index: 1; /* контент поверх эффекта */
+}

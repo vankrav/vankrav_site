@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 
+
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' });
 
 export const metadata = {
@@ -32,7 +33,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={inter.variable}>{children}</body>
+      <body className={`${inter.variable}`}>
+       
+        <div className="app-content">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
