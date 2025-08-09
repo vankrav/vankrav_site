@@ -186,12 +186,7 @@ form .row { display: grid; gap: 12px; }
   .header .nav { display: flex; }
 }
 
-/* На десктопе скрываем бургер и мобильное меню */
-@media (min-width: 840px) {
-  .burger-button { display: none; }
-  .menu-overlay { display: none; }
-  .mobile-menu { display: none; }
-}
+/* Бургер доступен и на десктопе; мобильное меню открывается слайдом */
 
 .bg-effect {
   position: fixed;

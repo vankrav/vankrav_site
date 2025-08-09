@@ -61,7 +61,7 @@ export default async function ProjectPage({ params }) {
         ) : null}
 
         <div style={{ marginTop: 24 }}>
-          <Link href="/work" className="btn">← Все проекты</Link>
+          <Link href="/projects" className="btn">← Все проекты</Link>
         </div>
       </main>
     </>

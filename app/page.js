@@ -41,7 +41,7 @@ export default function HomePage() {
           </h1>
           <p>{heroParagraph}</p>
           <div className="hero-cta">
-            <Link href="/work" className="btn primary">{ctaPrimary}</Link>
+            <Link href="/projects" className="btn primary">{ctaPrimary}</Link>
             <Link href="/contact" className="btn accent">{ctaSecondary}</Link>
             {/* <Link href="/resume" className="btn">Резюме</Link> */}
           </div>

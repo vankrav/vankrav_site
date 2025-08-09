@@ -47,7 +47,6 @@ export default function Header() {
           <Link href="/resume" className={isActive('/resume') ? 'active' : ''}>{t.nav.resume}</Link>
           <Link href="/contact" className={isActive('/contact') ? 'active' : ''}>{t.nav.contact}</Link>
         </nav>
-        <LanguageSwitcher />
         <button
           className={"burger-button" + (open ? ' open' : '')}
           aria-expanded={open}
