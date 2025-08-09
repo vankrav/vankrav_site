@@ -3,6 +3,7 @@ import ProjectCard from './components/ProjectCard';
 import { projects } from './lib/projects';
 import Link from 'next/link';
 import Image from 'next/image';
+import TextType from './components/TextType';
 
 export default function HomePage() {
   return (
@@ -15,7 +16,21 @@ export default function HomePage() {
             <span className="accent">Ivan Kravchuk</span>
             {/* <span className="accent">Иван Кравчук</span> */}
             <br/>
-            Media Artist / <br/>Creative Coder
+            <TextType
+              as="span"
+              text={["Media Artist", "Creative Coder", "Designer", "Developer"]}
+              typingSpeed={30}
+              deletingSpeed={14}
+              pauseDuration={2200}
+              initialDelay={100}
+              showCursor={true}
+              hideCursorWhileTyping={false}
+              cursorCharacter="_"
+              cursorBlinkDuration={0.7}
+              className=""
+              startOnVisible={true}
+              variableSpeed={{ min: 24, max: 60 }}
+            />
             {/* Медиахудожник / <br/>Креативный кодер */}
           </h1>
           <p>
@@ -43,9 +58,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="container">© {new Date().getFullYear()} vankrav</div>
-      </footer>
+      {/* Глобальный футер теперь в layout */}
     </>
   );
 }

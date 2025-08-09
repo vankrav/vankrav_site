@@ -18,13 +18,11 @@ export default function GameOfLifeBackground() {
   const nextGridRef = useRef(null);
   const colsRef = useRef(0);
   const rowsRef = useRef(0);
-  const dprRef = useRef(1);
   const lastTickRef = useRef(0);
   const runningRef = useRef(true);
   const lastPaintRef = useRef(0);
   const noisePatternRef = useRef(null);
   const grainCanvasRef = useRef(null);
-  const noiseAlphaRef = useRef(0.06);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,10 +41,6 @@ export default function GameOfLifeBackground() {
 
     function resize() {
       const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
-      dprRef.current = dpr;
-      // Чуть усилить шум на мобильных для заметности
-      const prefersMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
-      noiseAlphaRef.current = prefersMobile ? 0.1 : 0.06;
       const width = window.innerWidth;
       const height = window.innerHeight;
       // Игра
@@ -124,8 +118,8 @@ export default function GameOfLifeBackground() {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       // Сетка в CSS-пикселях, так как контекст уже масштабирован под DPR
-      const width = Math.floor(ctx.canvas.width / dprRef.current);
-      const height = Math.floor(ctx.canvas.height / dprRef.current);
+      const width = Math.floor(ctx.canvas.width / (window.devicePixelRatio || 1));
+      const height = Math.floor(ctx.canvas.height / (window.devicePixelRatio || 1));
 
       // Рисуем только живые клетки; цвет акцента #ff2a2a с мягкой прозрачностью
       ctx.fillStyle = "rgba(255,42,42,1)";
@@ -175,14 +169,14 @@ export default function GameOfLifeBackground() {
         lastNoiseTs = ts;
         updateNoisePattern();
         // перерисовать слой шума
-      const cssWidth = Math.floor(noiseCtx.canvas.width / dprRef.current);
-      const cssHeight = Math.floor(noiseCtx.canvas.height / dprRef.current);
-      noiseCtx.clearRect(0, 0, cssWidth, cssHeight);
+        const width = Math.floor(noiseCtx.canvas.width / (window.devicePixelRatio || 1));
+        const height = Math.floor(noiseCtx.canvas.height / (window.devicePixelRatio || 1));
+        noiseCtx.clearRect(0, 0, noiseCtx.canvas.width, noiseCtx.canvas.height);
         if (noisePatternRef.current) {
           noiseCtx.save();
-        noiseCtx.globalAlpha = noiseAlphaRef.current; // интенсивность плёночного шума
+          noiseCtx.globalAlpha = 0.06; // интенсивность плёночного шума
           noiseCtx.fillStyle = noisePatternRef.current;
-        noiseCtx.fillRect(0, 0, cssWidth, cssHeight);
+          noiseCtx.fillRect(0, 0, width, height);
           noiseCtx.restore();
         }
       }

@@ -38,6 +38,7 @@ export default function Header() {
        
         <nav className="nav">
           <Link href="/work" className={isActive('/work') ? 'active' : ''}>Работы</Link>
+          <Link href="/resume" className={isActive('/resume') ? 'active' : ''}>Резюме</Link>
           <Link href="/contact" className={isActive('/contact') ? 'active' : ''}>Контакты</Link>
         </nav>
         <button

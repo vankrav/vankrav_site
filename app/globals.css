@@ -145,6 +145,32 @@ a { color: inherit; text-decoration: none; }
 .filter[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
 
 .footer { padding: 48px 0 64px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); }
+/* Сетка футера */
+.footer-grid { display: grid; gap: 16px; align-items: start; }
+.footer-left { order: 2; text-align: center; }
+.footer-right { order: 1; }
+@media (min-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 2fr; align-items: center; }
+  .footer-left { order: 1; text-align: left; }
+  .footer-right { order: 2; }
+}
+
+/* Контактные иконки в футере */
+.contact-link { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 8px; color: var(--fg); background: transparent; transition: border-color .2s ease, color .2s ease, background .2s ease; }
+.contact-link:hover { border-color: var(--fg); background: rgba(0,0,0,.04); }
+
+/* Ряд контактов с подписями */
+.contact-row { display: grid; gap: 10px; justify-content: center; }
+.contact-list { display: grid; gap: 10px; }
+@media (min-width: 640px) {
+  .contact-list { grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 12px 24px; }
+}
+@media (min-width: 640px) {
+  .contact-row { grid-template-columns: repeat(auto-fit, minmax(220px, max-content)); gap: 12px 18px; }
+}
+.contact-item { display: inline-flex; align-items: center; gap: 8px; }
+.contact-text-link { color: var(--fg); }
+.contact-text-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Формы */
 input, textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: #f4f4f4; color: var(--fg); }
@@ -172,7 +198,25 @@ form .row { display: grid; gap: 12px; }
   pointer-events: none; /* фон не перехватывает клики */
 }
 
+/* На мобильных слегка усилим шум */
+@media (max-width: 640px) {
+  .bg-effect { opacity: 0.9; }
+}
+
 .app-content {
   position: relative;
   z-index: 1; /* контент поверх эффекта */
 }
+
+/* Узкая колонка с дополнительным правым отступом, чтобы визуально балансировать с логотипом в хедере */
+.resume-content {
+  /* дополнительный отступ справа равен базовому отступу контейнера */
+  padding-right: clamp(16px, 5vw, 28px);
+  max-width: 820px; /* комфортная длина строки как на других страницах */
+}
+
+/* Эффект печати */
+.text-type { display: inline-block; white-space: pre-wrap; }
+.text-type__cursor { margin-left: 0.25rem; display: inline-block; opacity: 1; animation: cursorBlink 0.9s infinite; }
+.text-type__cursor--hidden { display: none; }
+@keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }

@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import GameOfLifeBackground from './components/GameOfLifeBackground';
+import Footer from './components/Footer';
 
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' });
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
         <GameOfLifeBackground />
         <div className="app-content">
           {children}
+          <Footer />
         </div>
       </body>
     </html>
