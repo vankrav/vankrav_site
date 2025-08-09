@@ -6,7 +6,7 @@ export const projects = [
     category: 'Media Art',
     description: 'Генеративная инсталляция Миши Моста для СберУниверситета',
     images: [
-      'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=1200&auto=format&fit=crop'
+      '/images/neiro-most.jpeg'
     ],
     tech: ['TouchDesigner', 'comfyUI'],
     links: { publication: 'https://t.me/generativegallery/3167' },
@@ -20,7 +20,7 @@ export const projects = [
     category: 'Interactive',
     description: 'Мультимедийный проект‑исследование',
     images: [
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1200&auto=format&fit=crop'
+      '/images/motion-concrete.jpeg'
     ],
     tech: ['TouchDesigner', 'MediaPipe'],
     links: { publication: 'https://disk.yandex.ru/i/73pOErFxDlnqRQ' },
@@ -34,7 +34,7 @@ export const projects = [
     category: 'Design',
     description: 'Инклюзивные выставочные объекты',
     images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop'
+      '/images/tactile-models.jpeg'
     ],
     tech: ['Blender', '3D‑печать (SLA, FDM)'],
     links: { publication: 'https://example.com/tactile-models' },
@@ -47,7 +47,7 @@ export const projects = [
     category: 'Media Art',
     description: 'Перформанс Марии Рогозиной для выставки «Сигнальные огни» (КЦСИ, 2025)',
     images: [
-      'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?q=80&w=1200&auto=format&fit=crop'
+      '/images/smusma.jpeg'
     ],
     tech: ['Arduino', 'ESP32', 'TouchDesigner', 'Ableton Live'],
     links: {},
@@ -61,7 +61,7 @@ export const projects = [
     category: 'Interactive',
     description: 'Интерактивная инсталляция о восприятии и оживлении объектов через сердцебиение',
     images: [
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop'
+      '/images/nature-morte-nature-vivant.jpeg'
     ],
     tech: ['BPM sensor', 'TouchDesigner'],
     links: {},
@@ -75,7 +75,7 @@ export const projects = [
     category: 'Media Art',
     description: 'Интерактивная инсталляция о синтезе цвета и звука',
     images: [
-      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop'
+      '/images/pixel.jpeg'
     ],
     tech: ['TouchDesigner'],
     links: { publication: 'https://generativegallery.com/where_am_i/' },

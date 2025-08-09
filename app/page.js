@@ -13,9 +13,10 @@ export default function HomePage() {
           <h1>
           
             <span className="accent">Ivan Kravchuk</span>
-            
+            {/* <span className="accent">Иван Кравчук</span> */}
             <br/>
             Media Artist / <br/>Creative Coder
+            {/* Медиахудожник / <br/>Креативный кодер */}
           </h1>
           <p>
           Работал с «Radugadesign», «Generative gallery», «Новой Третьяковкой» и Музеем «Гараж». Открыт к нетиповым проектам  на стыке искусства, дизайна и технологий.
