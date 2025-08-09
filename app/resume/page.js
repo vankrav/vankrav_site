@@ -3,21 +3,22 @@ import Header from '../components/Header';
 export const metadata = { title: 'Резюме — vankrav' };
 
 export default function ResumePage() {
+  const cvUrl = '/pdf/cv_creative_coder.pdf';
+  const portfolioUrl = '/pdf/portfolio.pdf';
   return (
     <>
       <Header />
       <main className="container section">
         <div className="resume-content">
           <h1>Резюме</h1>
-          <p className="card-desc">Кратко о навыках и опыте. При необходимости подключим PDF.</p>
-          <h2 className="section-title">Опыт</h2>
-          <p className="card-desc">Работал с «Radugadesign», «Generative Gallery», «Новой Третьяковкой», Музеем «Гараж».</p>
-          <h2 className="section-title">Навыки</h2>
-          <ul>
-            <li>Touchdesigner, Blender, Unreal Engine, Ableton, Adobe CC, Figma</li>
-            <li>Python, C/C++, JavaScript, Git</li>
-            <li>Arduino, ESP32, DMX, OSC, 3D‑печать</li>
-          </ul>
+          <div className="hero-cta">
+            <a className="btn primary" href={cvUrl} target="_blank" rel="noopener noreferrer">
+              Скачать CV (PDF)
+            </a>
+            <a className="btn primary" href={portfolioUrl} target="_blank" rel="noopener noreferrer">
+              Портфолио (PDF)
+            </a>
+          </div>
         </div>
       </main>
     </>
