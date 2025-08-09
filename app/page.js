@@ -4,23 +4,30 @@ import { projects } from './lib/projects';
 import Link from 'next/link';
 import Image from 'next/image';
 import TextType from './components/TextType';
+import { dictionary } from './lib/i18n';
+import { getLangServer } from './lib/i18n.server';
 
 export default function HomePage() {
+  const lang = getLangServer();
+  const t = dictionary[lang];
+  const titles = t.hero.titles;
+  const heroName = t.hero.name;
+  const heroParagraph = t.hero.paragraph;
+  const ctaPrimary = t.hero.ctaPrimary;
+  const ctaSecondary = t.hero.ctaSecondary;
   return (
     <>
       <Header />
       <section className="hero">
         <div className="container">
           <h1>
-          
-            <span className="accent">Ivan Kravchuk</span>
-            {/* <span className="accent">Иван Кравчук</span> */}
+            <span className="accent">{heroName}</span>
             <br/>
             <TextType
               as="span"
-              text={["Media Artist", "Creative Coder", "Designer", "Developer"]}
-              typingSpeed={30}
-              deletingSpeed={14}
+              text={titles}
+              typingSpeed={35}
+              deletingSpeed={30}
               pauseDuration={2200}
               initialDelay={100}
               showCursor={true}
@@ -31,14 +38,11 @@ export default function HomePage() {
               startOnVisible={true}
               variableSpeed={{ min: 24, max: 60 }}
             />
-            {/* Медиахудожник / <br/>Креативный кодер */}
           </h1>
-          <p>
-          Работал с «Radugadesign», «Generative gallery», «Новой Третьяковкой» и Музеем «Гараж». Открыт к нетиповым проектам  на стыке искусства, дизайна и технологий.
-          </p>
+          <p>{heroParagraph}</p>
           <div className="hero-cta">
-            <Link href="/work" className="btn primary">Смотреть работы</Link>
-            <Link href="/contact" className="btn accent">Связаться</Link>
+            <Link href="/work" className="btn primary">{ctaPrimary}</Link>
+            <Link href="/contact" className="btn accent">{ctaSecondary}</Link>
             {/* <Link href="/resume" className="btn">Резюме</Link> */}
           </div>
         </div>

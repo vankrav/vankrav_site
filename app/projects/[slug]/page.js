@@ -1,26 +1,27 @@
 import Header from '@/app/components/Header';
-import Image from 'next/image';
-import { getProjectBySlug, projects } from '@/app/lib/projects';
+import { getProject } from '@/app/lib/cms';
+import { projects } from '@/app/lib/projects';
 import Link from 'next/link';
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }) {
-  const project = getProjectBySlug(params.slug);
-  return { title: `${project?.title ?? 'Проект'} — Vankrav` };
+export async function generateMetadata({ params }) {
+  const project = await getProject(params.slug);
+  return { title: `${project?.title ?? 'Project'} — Ivan Kravchuk` };
 }
 
-export default function ProjectPage({ params }) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectPage({ params }) {
+  const project = await getProject(params.slug);
+
   if (!project) {
     return (
       <>
         <Header />
         <main className="container section">
           <p>Проект не найден.</p>
-          <Link href="/projects" className="btn" style={{ marginTop: 12 }}>К списку проектов</Link>
+          <Link href="/work" className="btn" style={{ marginTop: 12 }}>К списку проектов</Link>
         </main>
       </>
     );
@@ -30,55 +31,37 @@ export default function ProjectPage({ params }) {
     <>
       <Header />
       <main className="container section">
-        <h1 style={{ marginBottom: 8 }}>{project.title}</h1>
-        <p className="card-desc" style={{ marginBottom: 24 }}>{project.description}</p>
-        <div style={{ display: 'grid', gap: 12 }}>
-          {project.images.map((src, idx) => (
-            <Image
-              key={idx}
-              src={src}
-              alt={`${project.title} — фото ${idx + 1}`}
-              width={1200}
-              height={720}
-              sizes="(max-width: 768px) 100vw, 1140px"
-              priority={idx === 0}
-            />
-          ))}
+        <h1 style={{ fontSize: 'clamp(32px,5vw,64px)', margin: 0 }}>{project.title}</h1>
+        <div className="card-meta" style={{ marginTop: 8 }}>{project.year} · {project.category}</div>
+
+        <div style={{ marginTop: 24, maxWidth: 820 }}>
+          <p className="card-desc">{project.content}</p>
         </div>
 
-        <div style={{ marginTop: 24, color: 'var(--muted)' }}>{project.content}</div>
-
-        {Array.isArray(project.tech) && project.tech.length > 0 && (
-          <div style={{ marginTop: 24 }}>
-            <div className="card-meta" style={{ marginBottom: 8 }}>Технологии</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+        {project.tech?.length ? (
+          <section className="section" style={{ paddingTop: 24 }}>
+            <h2 className="section-title">Technologies</h2>
+            <div>
               {project.tech.map((t) => (
-                <span key={t} className="tag">{t}</span>
+                <span key={t} className="tag" style={{ marginBottom: 6 }}>{t}</span>
               ))}
             </div>
-          </div>
-        )}
+          </section>
+        ) : null}
 
-        {(() => {
-          const linkEntries = Object.entries(project.links || {});
-          if (!linkEntries.length) return null;
-          const primary =
-            linkEntries.find(([k]) => k === 'demo') ||
-            linkEntries.find(([k]) => k === 'publication') ||
-            linkEntries[0];
-          const [kind, href] = primary;
-          const label = kind === 'demo' ? 'Открыть демо' : kind === 'publication' ? 'Открыть публикацию' : 'Перейти по ссылке';
-          return (
-            <div style={{ marginTop: 24 }}>
-              <a className="btn accent" href={href} target="_blank" rel="noopener noreferrer">
-                {label} ↗
-              </a>
+        {project.links ? (
+          <section className="section" style={{ paddingTop: 0 }}>
+            <h2 className="section-title">Links</h2>
+            <div className="list">
+              {project.links.demo && <a href={project.links.demo} className="list-item" target="_blank" rel="noreferrer">Demo ↗</a>}
+              {project.links.github && <a href={project.links.github} className="list-item" target="_blank" rel="noreferrer">GitHub ↗</a>}
+              {project.links.publication && <a href={project.links.publication} className="list-item" target="_blank" rel="noreferrer">Publication ↗</a>}
             </div>
-          );
-        })()}
+          </section>
+        ) : null}
 
         <div style={{ marginTop: 24 }}>
-          <Link href="/projects" className="btn">← Все проекты</Link>
+          <Link href="/work" className="btn">← Все проекты</Link>
         </div>
       </main>
     </>

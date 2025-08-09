@@ -9,7 +9,7 @@ export default function WorkFilters({ active }) {
     const newParams = new URLSearchParams(params.toString());
     if (type === 'all') newParams.delete('type');
     else newParams.set('type', type);
-    router.replace(`/work?${newParams.toString()}`);
+    router.replace(`/projects?${newParams.toString()}`);
   };
 
   return (
