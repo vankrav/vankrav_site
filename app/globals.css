@@ -108,9 +108,15 @@ a { color: inherit; text-decoration: none; }
 .hero h1 { font-size: clamp(40px, 6vw, 84px); line-height: 1.05; margin: 0 0 16px; letter-spacing: -0.5px; }
 .hero p { color: var(--muted); max-width: 800px; font-size: clamp(16px, 2vw, 20px); }
 .hero-cta { margin-top: 28px; display: flex; gap: 14px; }
-.btn { padding: 12px 16px; border-radius: 8px; border: 1px solid var(--fg); background: #dedede; color: var(--fg); transition: background .2s ease, color .2s ease; }
+.hero-ava { vertical-align: baseline; margin-left: 12px; }
+.btn { padding: 12px 16px; border-radius: 8px; border: 1px solid var(--fg); background: #dedede; color: var(--fg); transition: background .2s ease, color .2s ease, box-shadow .2s ease; }
 .btn.primary { background: var(--fg); color: var(--bg); }
-.btn:hover { background: var(--fg); color: var(--bg); }
+/* .btn:hover { box-shadow: 0 0 0 1px var(--fg); } */
+/* Акцентная кнопка (красная) */
+.btn.accent { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn.accent:hover { background: #dedede; color: var(--accent); }
+/* Для primary тот же контур без смены фона */
+.btn.primary:hover {  background: #dedede; color: var(--fg); }
 
 .section { padding: 64px 0; }
 .section-title { font-size: 18px; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
@@ -121,7 +127,7 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 1040px) { .grid { gap: 24px; } }
 
 .card { background: #dedede; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: transform .2s ease, border-color .2s ease, background .2s ease; display: flex; flex-direction: column; }
-.card:hover { transform: translateY(-2px); border-color: var(--fg); background: rgba(0,0,0,.03); }
+.card:hover { transform: translateY(-2px); border-color: var(--fg); background: #dedede; }
 .card img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; }
 .card-body { padding: 14px; }
 .card-title { font-weight: 700; }
@@ -146,7 +152,11 @@ label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px
 form .row { display: grid; gap: 12px; }
 @media (min-width: 720px) { form .row.two { grid-template-columns: 1fr 1fr; } }
 
-@media (min-width: 840px) { .nav { display: flex; } }
+@media (min-width: 840px) {
+  .nav { display: flex; }
+  /* Повышаем специфичность на всякий случай */
+  .header .nav { display: flex; }
+}
 
 /* На десктопе скрываем бургер и мобильное меню */
 @media (min-width: 840px) {

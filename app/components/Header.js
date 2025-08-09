@@ -34,7 +34,8 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container header-inner">
-        <Link href="/" className="logo">vankrav</Link>
+      <Link href="/" className="logo">vankrav</Link>
+       
         <nav className="nav">
           <Link href="/work" className={isActive('/work') ? 'active' : ''}>Работы</Link>
           <Link href="/contact" className={isActive('/contact') ? 'active' : ''}>Контакты</Link>
