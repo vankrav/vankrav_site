@@ -19,13 +19,17 @@ export default async function WorkPage({ searchParams }) {
   return (
     <>
       <Header />
-      <main className="container section">
-        <h1 className="section-title">Work</h1>
-        <WorkFilters active={active} />
-        <div className="grid">
-          {filtered.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
-          ))}
+      <main className="section">
+        <div className="container">
+          <h1 className="section-title">Work</h1>
+          <WorkFilters active={active} />
+        </div>
+        <div className="work-grid">
+          <div className="grid">
+            {filtered.map((p) => (
+              <ProjectCard key={p.slug} project={p} />
+            ))}
+          </div>
         </div>
       </main>
     </>
