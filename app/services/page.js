@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Link from 'next/link';
+import Button from '../components/ui/Button';
 
 export const metadata = { title: 'Services — Ivan Kravchuk' };
 
@@ -16,7 +17,7 @@ export default function ServicesPage() {
           <div className="list-item"><span>Creative Prototyping</span><span>→</span></div>
         </div>
         <div style={{ marginTop: 16 }}>
-          <Link href="/contact" className="btn primary">Связаться</Link>
+          <Button href="/contact" variant="primary">Связаться</Button>
         </div>
       </main>
     </>

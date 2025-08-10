@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Button from './ui/Button';
 
 export default function Hero() {
   return (
@@ -10,8 +11,8 @@ export default function Hero() {
           Открыт к нетиповым проектам на стыке искусства, дизайна и технологий.
         </p>
         <div className="hero-cta">
-          <Link href="/work" className="btn primary">Смотреть работы</Link>
-          <Link href="/contact" className="btn">Связаться</Link>
+          <Button href="/work" variant="primary">Смотреть работы</Button>
+          <Button href="/contact">Связаться</Button>
         </div>
       </div>
     </section>

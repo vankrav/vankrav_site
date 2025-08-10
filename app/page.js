@@ -2,6 +2,7 @@ import Header from './components/Header';
 import ProjectCard from './components/ProjectCard';
 import { projects } from './lib/projects';
 import Link from 'next/link';
+import Button from './components/ui/Button';
 import Image from 'next/image';
 import TextType from './components/TextType';
 import { dictionary } from './lib/i18n';
@@ -41,9 +42,9 @@ export default function HomePage() {
           </h1>
           <p>{heroParagraph}</p>
           <div className="hero-cta">
-            <Link href="/work" className="btn primary">{ctaPrimary}</Link>
-            <Link href="/contact" className="btn accent">{ctaSecondary}</Link>
-            {/* <Link href="/resume" className="btn">Резюме</Link> */}
+            <Button href="/work" variant="primary">{ctaPrimary}</Button>
+            <Button href="/contact" variant="accent">{ctaSecondary}</Button>
+            {/* <Button href="/resume">Резюме</Button> */}
           </div>
         </div>
       </section>
@@ -57,7 +58,7 @@ export default function HomePage() {
             ))}
           </div>
           <div style={{ marginTop: 40 }}>
-            <Link href="/work" className="btn">Все проекты →</Link>
+            <Button href="/work">Все проекты →</Button>
           </div>
         </section>
       </main>

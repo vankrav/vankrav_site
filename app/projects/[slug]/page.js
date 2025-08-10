@@ -2,6 +2,8 @@ import Header from '@/app/components/Header';
 import { getProject } from '@/app/lib/cms';
 import { projects } from '@/app/lib/projects';
 import Link from 'next/link';
+import Button from '@/app/components/ui/Button';
+import Chip from '@/app/components/ui/Chip';
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -21,7 +23,7 @@ export default async function ProjectPage({ params }) {
         <Header />
         <main className="container section">
           <p>Проект не найден.</p>
-          <Link href="/work" className="btn" style={{ marginTop: 12 }}>К списку проектов</Link>
+          <Button href="/work" style={{ marginTop: 12 }}>К списку проектов</Button>
         </main>
       </>
     );
@@ -43,7 +45,7 @@ export default async function ProjectPage({ params }) {
             <h2 className="section-title">Technologies</h2>
             <div>
               {project.tech.map((t) => (
-                <span key={t} className="tag" style={{ marginBottom: 6 }}>{t}</span>
+                <Chip key={t} className="" >{t}</Chip>
               ))}
             </div>
           </section>
@@ -61,7 +63,7 @@ export default async function ProjectPage({ params }) {
         ) : null}
 
         <div style={{ marginTop: 24 }}>
-          <Link href="/projects" className="btn">← Все проекты</Link>
+          <Button href="/projects">← Все проекты</Button>
         </div>
       </main>
     </>

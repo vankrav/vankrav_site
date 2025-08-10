@@ -21,7 +21,7 @@ export default async function WorkPage({ searchParams }) {
       <Header />
       <main className="section">
         <div className="container">
-          <h1 className="section-title">Проекты</h1>
+          <h1>Проекты</h1>
           <WorkFilters active={active} />
         </div>
         <div className="work-grid">

@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import Image from 'next/image';
+import Chip from '../components/ui/Chip';
 
 export const metadata = { title: 'О себе — Ivan Kravchuk' };
 
@@ -48,33 +49,33 @@ export default function AboutPage() {
                   <div>
                     <div className="muted" style={{ marginBottom: 8 }}>Инструменты</div>
                     <div className="tags">
-                      <span className="tag">TouchDesigner</span>
-                      <span className="tag">Blender</span>
-                      <span className="tag">Unreal Engine</span>
-                      <span className="tag">Ableton</span>
-                      <span className="tag">Adobe CC</span>
-                      <span className="tag">Figma</span>
+                      <Chip>TouchDesigner</Chip>
+                      <Chip>Blender</Chip>
+                      <Chip>Unreal Engine</Chip>
+                      <Chip>Ableton</Chip>
+                      <Chip>Adobe CC</Chip>
+                      <Chip>Figma</Chip>
                     </div>
                   </div>
 
                   <div>
                     <div className="muted" style={{ margin: '16px 0 8px' }}>Программирование</div>
                     <div className="tags">
-                      <span className="tag">Python</span>
-                      <span className="tag">C/C++</span>
-                      <span className="tag">JavaScript</span>
-                      <span className="tag">Git</span>
+                      <Chip>Python</Chip>
+                      <Chip>C/C++</Chip>
+                      <Chip>JavaScript</Chip>
+                      <Chip>Git</Chip>
                     </div>
                   </div>
 
                   <div>
                     <div className="muted" style={{ margin: '16px 0 8px' }}>Hardware / прототипирование</div>
                     <div className="tags">
-                      <span className="tag">Arduino</span>
-                      <span className="tag">ESP32</span>
-                      <span className="tag">DMX</span>
-                      <span className="tag">OSC</span>
-                      <span className="tag">3D‑печать</span>
+                      <Chip>Arduino</Chip>
+                      <Chip>ESP32</Chip>
+                      <Chip>DMX</Chip>
+                      <Chip>OSC</Chip>
+                      <Chip>3D‑печать</Chip>
                     </div>
                   </div>
                 </div>

@@ -143,7 +143,7 @@ a { color: inherit; text-decoration: none; }
 .list-item a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .filters { display: flex; gap: 12px; margin: 12px 0 24px; }
-.filter { padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; background: transparent; }
+.filter { padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; cursor: pointer; background: #dedede; }
 .filter[aria-pressed="true"] { border-color: var(--fg); color: var(--fg); }
 
 .footer { padding: 48px 0 64px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); }
@@ -232,3 +232,58 @@ form .row { display: grid; gap: 12px; }
 .about-item:last-child { border-bottom: 0; }
 .muted { color: var(--muted); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* Карточка в сайдбаре контактов */
+.contact-aside {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f4f4f4;
+}
+
+/* Контакты — новая компоновка */
+.contact-hero { padding-bottom: 12px; }
+.contact-hero h1 {
+  font-size: clamp(36px, 5.5vw, 64px);
+  line-height: 1.06;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f4f4f4;
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+.contact-card:hover { transform: translateY(-2px); border-color: var(--fg); background: #ececec; }
+.contact-card__icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #dedede;
+}
+.contact-card__title { font-weight: 700; }
+.contact-card__subtitle { color: var(--muted); font-size: 14px; }
+
+.contact-form {
+  margin-top: 28px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f4f4f4;
+}
+.contact-actions { margin-top: 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
