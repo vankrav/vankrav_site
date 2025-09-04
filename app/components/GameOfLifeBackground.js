@@ -35,7 +35,7 @@ export default function GameOfLifeBackground() {
 
     const preferredCellSize = 16; // в CSS-пикселях — крупнее клетки
     const tickIntervalMs = 60; // частота обновления игры
-    const deathProbability = 0.01; // вероятность естественной смерти за тик
+    const deathProbability = 0.1; // вероятность естественной смерти за тик
     const noiseIntervalMs = 100; // обновление шума ~16 FPS
     const grainTileSize = 64; // размер тайла для шума
 
