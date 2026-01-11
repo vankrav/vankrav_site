@@ -11,9 +11,7 @@ import { useEffect, useRef } from "react";
 
 export default function GameOfLifeBackground() {
   const canvasRef = useRef(null); // канвас игры жизни
-  const noiseCanvasRef = useRef(null); // канвас плёночного шума
   const rafRef = useRef(0);
-  const noiseRafRef = useRef(0);
   const gridRef = useRef(null);
   const nextGridRef = useRef(null);
   const colsRef = useRef(0);
@@ -21,25 +19,17 @@ export default function GameOfLifeBackground() {
   const lastTickRef = useRef(0);
   const runningRef = useRef(true);
   const lastPaintRef = useRef(0);
-  const noisePatternRef = useRef(null);
-  const grainCanvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const noiseCanvas = noiseCanvasRef.current;
-    if (!canvas || !noiseCanvas) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
-    const noiseCtx = noiseCanvas.getContext("2d", { alpha: true, desynchronized: true });
-    if (!ctx || !noiseCtx) return;
+    if (!ctx) return;
 
     const preferredCellSize = 16; // в CSS-пикселях — крупнее клетки
     const tickIntervalMs = 60; // частота обновления игры
     const deathProbability = 0.1; // вероятность естественной смерти за тик
-    // На мобильных увеличиваем интервал для производительности
-    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
-    const noiseIntervalMs = isMobile ? 150 : 100; // обновление шума: медленнее на мобильных
-    const grainTileSize = isMobile ? 48 : 64; // меньший тайл на мобильных для производительности
 
     function resize() {
       const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
@@ -57,13 +47,6 @@ export default function GameOfLifeBackground() {
       canvas.height = Math.floor(height * dpr);
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
-      // Шум
-      noiseCanvas.style.width = `${width}px`;
-      noiseCanvas.style.height = `${height}px`;
-      noiseCanvas.width = Math.floor(width * dpr);
-      noiseCanvas.height = Math.floor(height * dpr);
-      noiseCtx.setTransform(1, 0, 0, 1, 0, 0);
-      noiseCtx.scale(dpr, dpr);
 
       const cols = Math.max(10, Math.floor(width / preferredCellSize));
       const rows = Math.max(10, Math.floor(height / preferredCellSize));
@@ -72,17 +55,8 @@ export default function GameOfLifeBackground() {
 
       gridRef.current = new Uint8Array(cols * rows);
       nextGridRef.current = new Uint8Array(cols * rows);
-      //   seed(gridRef.current, cols, rows);
       draw(ctx, gridRef.current, cols, rows, preferredCellSize);
     }
-
-    // function seed(grid, cols, rows) {
-    //   // равномерная инициализация с разреженностью
-    //   const density = 0.18; // 18% живых
-    //   for (let i = 0; i < grid.length; i++) {
-    //     grid[i] = Math.random() < density ? 1 : 0;
-    //   }
-    // }
 
     function step(current, next, cols, rows) {
       let aliveCount = 0;
@@ -124,10 +98,6 @@ export default function GameOfLifeBackground() {
       // Полностью перерисовываем кадр для детерминированности
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-      // Сетка в CSS-пикселях, так как контекст уже масштабирован под DPR
-      const width = Math.floor(ctx.canvas.width / (window.devicePixelRatio || 1));
-      const height = Math.floor(ctx.canvas.height / (window.devicePixelRatio || 1));
-
       // Рисуем только живые клетки; цвет акцента #ff2a2a с мягкой прозрачностью
       ctx.fillStyle = "rgba(255,42,42,1)";
       for (let y = 0; y < rows; y++) {
@@ -137,57 +107,6 @@ export default function GameOfLifeBackground() {
           }
         }
       }
-    }
-
-    // Подготовка тайла шума
-    function ensureGrainCanvas() {
-      if (!grainCanvasRef.current) {
-        const off = document.createElement("canvas");
-        off.width = grainTileSize;
-        off.height = grainTileSize;
-        grainCanvasRef.current = off;
-      }
-      return grainCanvasRef.current;
-    }
-
-    function updateNoisePattern() {
-      const off = ensureGrainCanvas();
-      const gctx = off.getContext("2d", { alpha: true });
-      const imageData = gctx.createImageData(off.width, off.height);
-      const data = imageData.data;
-      for (let i = 0; i < data.length; i += 4) {
-        const v = (Math.random() * 255) | 0; // случайный серый
-        data[i] = v;
-        data[i + 1] = v;
-        data[i + 2] = v;
-        data[i + 3] = 255;
-      }
-      gctx.putImageData(imageData, 0, 0);
-      noisePatternRef.current = noiseCtx.createPattern(off, "repeat");
-    }
-
-    let lastNoiseTs = 0;
-    function animateNoise(ts) {
-      if (!runningRef.current) {
-        noiseRafRef.current = requestAnimationFrame(animateNoise);
-        return;
-      }
-      if (ts - lastNoiseTs >= noiseIntervalMs) {
-        lastNoiseTs = ts;
-        updateNoisePattern();
-        // перерисовать слой шума
-        const width = Math.floor(noiseCtx.canvas.width / (window.devicePixelRatio || 1));
-        const height = Math.floor(noiseCtx.canvas.height / (window.devicePixelRatio || 1));
-        noiseCtx.clearRect(0, 0, noiseCtx.canvas.width, noiseCtx.canvas.height);
-        if (noisePatternRef.current) {
-          noiseCtx.save();
-          noiseCtx.globalAlpha = 0.06; // интенсивность плёночного шума
-          noiseCtx.fillStyle = noisePatternRef.current;
-          noiseCtx.fillRect(0, 0, width, height);
-          noiseCtx.restore();
-        }
-      }
-      noiseRafRef.current = requestAnimationFrame(animateNoise);
     }
 
     function animate(ts) {
@@ -204,11 +123,7 @@ export default function GameOfLifeBackground() {
         const current = gridRef.current;
         const next = nextGridRef.current;
         if (current && next && cols && rows) {
-          const alive = step(current, next, cols, rows);
-        //   // если почти всё вымерло — пересеять для динамики
-        //   if (alive < (cols * rows) * 0.04) {
-        //     seed(next, cols, rows);
-        //   }
+          step(current, next, cols, rows);
           gridRef.current = next;
           nextGridRef.current = current;
           draw(ctx, gridRef.current, cols, rows, preferredCellSize);
@@ -278,11 +193,9 @@ export default function GameOfLifeBackground() {
       window.visualViewport.addEventListener("resize", handleResize);
     }
     rafRef.current = requestAnimationFrame(animate);
-    noiseRafRef.current = requestAnimationFrame(animateNoise);
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(noiseRafRef.current);
       document.removeEventListener("visibilitychange", handleVisibility);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pointermove", handlePointerMove);
@@ -294,11 +207,6 @@ export default function GameOfLifeBackground() {
   }, []);
 
   return (
-    <>
-      <canvas ref={canvasRef} className="bg-effect" aria-hidden="true" />
-      <canvas ref={noiseCanvasRef} className="bg-effect" aria-hidden="true" />
-    </>
+    <canvas ref={canvasRef} className="bg-effect" aria-hidden="true" />
   );
 }
-
-
