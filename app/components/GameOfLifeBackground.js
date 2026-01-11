@@ -36,8 +36,10 @@ export default function GameOfLifeBackground() {
     const preferredCellSize = 16; // в CSS-пикселях — крупнее клетки
     const tickIntervalMs = 60; // частота обновления игры
     const deathProbability = 0.1; // вероятность естественной смерти за тик
-    const noiseIntervalMs = 100; // обновление шума ~16 FPS
-    const grainTileSize = 64; // размер тайла для шума
+    // На мобильных увеличиваем интервал для производительности
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
+    const noiseIntervalMs = isMobile ? 150 : 100; // обновление шума: медленнее на мобильных
+    const grainTileSize = isMobile ? 48 : 64; // меньший тайл на мобильных для производительности
 
     function resize() {
       const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));

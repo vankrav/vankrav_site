@@ -1,7 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import GameOfLifeBackground from './components/GameOfLifeBackground';
-import Footer from './components/Footer';
 import { cookies } from 'next/headers';
 
 
@@ -42,7 +41,6 @@ export default function RootLayout({ children }) {
         <GameOfLifeBackground />
         <div className="app-content">
           {children}
-          <Footer />
         </div>
       </body>
     </html>
