@@ -44,7 +44,12 @@ export default function GameOfLifeBackground() {
     function resize() {
       const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
       const width = window.innerWidth;
-      const height = window.innerHeight;
+      // Используем максимальную высоту для мобильных (учитываем динамическую адресную строку)
+      const height = Math.max(
+        window.innerHeight,
+        document.documentElement.clientHeight,
+        window.visualViewport?.height || 0
+      );
       // Игра
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
@@ -268,6 +273,10 @@ export default function GameOfLifeBackground() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    // Слушаем изменения visualViewport для iOS (адресная строка, клавиатура)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", handleResize);
+    }
     rafRef.current = requestAnimationFrame(animate);
     noiseRafRef.current = requestAnimationFrame(animateNoise);
 
@@ -278,6 +287,9 @@ export default function GameOfLifeBackground() {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("touchmove", handleTouchMove);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", handleResize);
+      }
     };
   }, []);
 

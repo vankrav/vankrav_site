@@ -190,7 +190,12 @@ form .row { display: grid; gap: 12px; }
 
 .bg-effect {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh; /* динамическая высота для мобильных */
+  min-height: 100vh;
   z-index: 0;
   pointer-events: none; /* фон не перехватывает клики */
   will-change: contents; /* оптимизация для анимации */

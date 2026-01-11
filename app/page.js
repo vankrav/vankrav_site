@@ -100,7 +100,6 @@ export default function ComingSoonPage() {
                 <span className="link-card__title">{link.title}</span>
                 <span className="link-card__subtitle">{link.subtitle}</span>
               </span>
-              <span className="link-card__arrow">→</span>
             </a>
           ))}
         </nav>
